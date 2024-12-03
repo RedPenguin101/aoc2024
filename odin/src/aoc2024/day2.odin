@@ -8,9 +8,9 @@ acceptable_part1 :: proc(numbers : []int) -> int {
     increasing := (numbers[1] > numbers[0])
     count := len(numbers)
     delta:int
-    for i:=1; i<count ; i+=1 {
+    for i in 1..<count {
         delta = numbers[i] - numbers[i-1]
-        if increasing && delta < 0 || !increasing && delta > 0 || 
+        if increasing && delta < 0 || !increasing && delta > 0 ||
            abs(delta) < 1 || abs(delta) > 3 {
             return 0
         }
@@ -25,11 +25,11 @@ acceptable_part2 :: proc(numbers:[]int, skip:int) -> int {
     increasing := current > comparison
     delta:int
 
-    for i:=first_check; i<len(numbers); i+=1 {
+    for i in first_check..<len(numbers) {
         if i == skip do continue
         current = numbers[i]
         delta = current - comparison
-        if increasing && delta < 0 || !increasing && delta > 0  || 
+        if increasing && delta < 0 || !increasing && delta > 0  ||
            abs(delta) < 1 || abs(delta) > 3 {
             if (skip < len(numbers)-1) {
                 return acceptable_part2(numbers, skip+1)
@@ -37,7 +37,7 @@ acceptable_part2 :: proc(numbers:[]int, skip:int) -> int {
                 return 0
             }
         }
-        comparison = current 
+        comparison = current
     }
     return 1
 }

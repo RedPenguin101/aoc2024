@@ -31,10 +31,10 @@ day1 :: proc()  {
     slice.sort(list2[:])
 
     part1: = 0
-    for i := 0; i < rows; i+=1 {
+    for i in 0..<rows {
        part1 += abs(list1[i] - list2[i])
     }
-    fmt.printfln("Part 1: %d", part1)
+    fmt.printfln("Part1: %d", part1)
 
     part2 := 0
     l2_idx := 0
@@ -50,7 +50,7 @@ day1 :: proc()  {
         part2 += key * l2_count
         l2_count = 0
     }
-    fmt.printfln("Part 2: %d", part2)
+    fmt.printfln("Part2: %d", part2)
     assert(part1 == 1651298)
     assert(part2 == 21306195)
 }
