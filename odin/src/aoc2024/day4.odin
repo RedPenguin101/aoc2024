@@ -3,7 +3,6 @@ import "core:fmt"
 import "core:os"
 import "core:strings"
 
-
 day4 :: proc()  {
     input_filename :: "../../../inputs/day4.txt"
     data, _ := os.read_entire_file(input_filename)
@@ -13,16 +12,6 @@ day4 :: proc()  {
     lines := strings.split_lines(string_data)
     cols := len(lines[0])
     rows := len(lines)-1
-    rotated := make([]string, cols)
-    defer delete(rotated)
-    r_row : []u8
-    for c in 0..<cols {
-        r_row = make([]u8, rows)
-        for r in 0..<rows {
-            r_row[r] = lines[r][c]
-        }
-        rotated[c] = string(r_row)
-    }
 
     in_col_bounds:bool
     in_row_bounds:bool
@@ -34,7 +23,15 @@ day4 :: proc()  {
             in_col_bounds = c < (cols - 3)
             in_row_bounds = r < (rows - 3)
             if in_col_bounds && (lines[r][c:c+4] == "XMAS" || lines[r][c:c+4] == "SAMX") do part1 += 1
-            if in_row_bounds && (rotated[c][r:r+4] == "XMAS" || rotated[c][r:r+4] == "SAMX") do part1 += 1
+            if in_row_bounds &&
+                (lines[r][c]   == 'X' &&
+                 lines[r+1][c] == 'M' &&
+                 lines[r+2][c] == 'A' &&
+                 lines[r+3][c] == 'S' ||
+                 lines[r][c]   == 'S' &&
+                 lines[r+1][c] == 'A' &&
+                 lines[r+2][c] == 'M' &&
+                 lines[r+3][c] == 'X') { part1 += 1 }
             if in_row_bounds && in_col_bounds &&
                 (lines[r][c]     == 'X' &&
                  lines[r+1][c+1] == 'M' &&
