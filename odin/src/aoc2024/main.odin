@@ -14,6 +14,8 @@ main :: proc() {
     day4()
     fmt.println("Day 5:")
     day5()
+    fmt.println("Day 6:")
+    day6()
     t_dur := time.diff(t_start, time.now())
     fmt.println("Time:", t_dur)
 }
